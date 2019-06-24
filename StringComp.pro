@@ -12,5 +12,6 @@ HEADERS += \
     StringComp.hpp \
     Tester.hpp
 
-DISTFILES += \
-    Right.qml
+OTHER_FILES += README.md \
+    .clang-format \
+    LICENSE

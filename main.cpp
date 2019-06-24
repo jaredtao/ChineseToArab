@@ -3,19 +3,19 @@
 
 int main(int argc, char *argv[])
 {
-    qWarning() << (chineseToNum(u8"十") == 10);
-    qWarning() << (chineseToNum(u8"三十") == 30);
-    qWarning() << (chineseToNum(u8"一百") == 100);
-    qWarning() << (chineseToNum(u8"三十九") == 39);
-    qWarning() << chineseToNum(u8"四百八十万") << (chineseToNum(u8"四百八十万") == 4800000);
-    qWarning() << (chineseToNum(u8"九千一百") == 9100);
-    qWarning() << (chineseToNum(u8"九千") == 9000);
-    qWarning() << (chineseToNum(u8"一百零一") == 101);
-    qWarning() << (chineseToNum(u8"九百二十一") == 921);
-    qWarning() << chineseToNum(u8"五十六万零一十") << (chineseToNum(u8"五十六万零一十") == 560010);
-    qWarning() << (chineseToNum(u8"一万亿零二千一百零一") == 1000000002101);
-    qWarning() << chineseToNum(u8"一万亿二千一百万零一百零一") << (chineseToNum(u8"一万亿二千一百万零一百零一") == 1000021000101);
-    qWarning() << chineseToNum(u8"一万零二百三十亿四千万零七千八百九十") << (chineseToNum(u8"一万零二百三十亿四千万零七千八百九十") == 1023040007890);
+    qInfo() << (chineseToNum(u8"十") == 10);
+    qInfo() << (chineseToNum(u8"三十") == 30);
+    qInfo() << (chineseToNum(u8"一百") == 100);
+    qInfo() << (chineseToNum(u8"三十九") == 39);
+    qInfo() << (chineseToNum(u8"四百八十万") == 4800000);
+    qInfo() << (chineseToNum(u8"九千一百") == 9100);
+    qInfo() << (chineseToNum(u8"九千") == 9000);
+    qInfo() << (chineseToNum(u8"一百零一") == 101);
+    qInfo() << (chineseToNum(u8"九百二十一") == 921);
+    qInfo() << (chineseToNum(u8"五十六万零一十") == 560010);
+    qInfo() << (chineseToNum(u8"一万亿零二千一百零一") == 1000000002101);
+    qInfo() << (chineseToNum(u8"一万亿二千一百万零一百零一") == 1000021000101);
+    qInfo() << (chineseToNum(u8"一万零二百三十亿四千万零七千八百九十") == 1023040007890);
 
     Tester tester;
 

@@ -97,7 +97,7 @@ static qint64 getMatchValue(const QString &str, bool &ok) noexcept
 
         auto match = reg.match(str);
         if (!match.hasMatch()) {
-            break;
+            break; //break means goto next compare
         }
         ok = true;
         return -getValueByGroup(match);
@@ -143,53 +143,4 @@ static bool stringComp(const QString &str1, const QString &str2) noexcept
         return false;
     }
     return value1 < value2;
-//    do {
-//        const static QString chineseNum = u8"零一二三四五六七八九十百千万亿壹贰叁肆伍陆柒捌玖拾佰仟萬";
-//        const static QRegularExpression reg(QString(u8R"(负(?<floorNum1>\d+)|负(?<floorChinese1>[%1]+)|地下(?<floorNum2>\d+)|地下(?<floorChinese2>[%1]+))").arg(chineseNum));
-//        auto match1 = reg.match(str1);
-//        if (!match1.hasMatch()) {
-//            break;  //break means goto next compare
-//        }
-//        auto match2 = reg.match(str2);
-//        if (!match2.hasMatch()) {
-//            break; //break means goto next compare
-//        }
-//        qint64 value1, value2;
-//        value1 = -getValueByGroup(match1);
-//        value2 = -getValueByGroup(match2);
-//        return value1 < value2;
-//    } while(false);
-//    do {
-//        const static QString chineseNum = u8"零一二三四五六七八九十百千万亿壹贰叁肆伍陆柒捌玖拾佰仟萬";
-//        const static QRegularExpression reg(QString(u8R"((?<floorChinese>[%1]+))").arg(chineseNum));
-//        auto match1 = reg.match(str1);
-//        if (!match1.hasMatch()) {
-//            break;  //break means goto next compare
-//        }
-//        auto match2 = reg.match(str2);
-//        if (!match2.hasMatch()) {
-//            break; //break means goto next compare
-//        }
-//        qint64 value1, value2;
-//        value1 = chineseToNum(match1.captured(QStringLiteral("floorChinese")));
-//        value2 = chineseToNum(match2.captured(QStringLiteral("floorChinese")));
-//        return value1 < value2;
-//    } while(false);
-//    do {
-//        const static QRegularExpression reg(R"(-?\d+)");
-//        auto match1 = reg.match(str1);
-//        if (!match1.hasMatch()) {
-//            break;  //break means goto next compare
-//        }
-//        auto match2 = reg.match(str2);
-//        if (!match2.hasMatch()) {
-//            break; //break means goto next compare
-//        }
-//        qint64 value1, value2;
-//        value1 = match1.captured(0).toLongLong();
-//        value2 = match2.captured(0).toLongLong();
-//        return value1 < value2;
-//    } while(false);
-
-    return false;
 }
