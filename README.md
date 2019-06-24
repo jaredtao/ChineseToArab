@@ -1,8 +1,8 @@
-﻿- [ChineseStringComp](#ChineseStringComp)
+﻿- [ChineseToArab](#ChineseToArab)
   - [联系方式](#%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F)
   - [赞助](#%E8%B5%9E%E5%8A%A9)
 
-# ChineseStringComp
+# ChineseToArab
 
 中文数字转阿拉伯数字算法，C++/Qt实现。
 
