@@ -88,7 +88,7 @@ static qint64 getValueByGroup(const QRegularExpressionMatch &match)
     }
     return 0;
 }
-static qint64 getMatchValue(const QString &str, bool &ok) noexcept
+static double getMatchValue(const QString &str, bool &ok) noexcept
 {
     ok = false;
     do {
@@ -100,7 +100,7 @@ static qint64 getMatchValue(const QString &str, bool &ok) noexcept
             break; //break means goto next compare
         }
         ok = true;
-        return -getValueByGroup(match);
+        return -static_cast<double>(getValueByGroup(match));
     } while(false);
 
     do {
@@ -111,36 +111,74 @@ static qint64 getMatchValue(const QString &str, bool &ok) noexcept
             break;  //break means goto next compare
         }
         ok = true;
-        return chineseToNum(match.captured(QStringLiteral("floorChinese")));
+        return static_cast<double>(chineseToNum(match.captured(QStringLiteral("floorChinese"))));
     } while(false);
     do {
-        const static QRegularExpression reg(R"(-?\d+)");
+        const static QRegularExpression reg(R"(-?[0-9]+([.]{1}[0-9]+){0,1})");
         auto match = reg.match(str);
         if (!match.hasMatch()) {
             break;  //break means goto next compare
         }
         ok = true;
-        return match.captured(0).toLongLong();
+        return match.captured(0).toDouble();
     } while(false);
-    return 0;
+    return 0.;
+}
+static int FloorStringCompare(const QString &strA, const QString &strB)
+{
+    if (isZero(strA))
+    {
+        return -1;
+    }
+    else if (isZero(strB))
+    {
+        return 1;
+    }
+    double value1, value2;
+    bool ok;
+    value1 = getMatchValue(strA, ok);
+    if (!ok)
+    {
+        return 1;
+    }
+    value2 = getMatchValue(strB, ok);
+    if (!ok)
+    {
+        return -1;
+    }
+    double v = value1 - value2;
+    const static double ESPON = 0.000001;
+    if (-ESPON < v && v < ESPON)
+    {
+        return 0;
+    }
+    else if (v > ESPON)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
 }
 static bool stringComp(const QString &str1, const QString &str2) noexcept
 {
-    if (isZero(str1))
-    {
-        return true;
-    } else if (isZero(str2)) {
-        return false;
-    }
-    qint64 value1, value2;
-    bool ok;
-    value1 = getMatchValue(str1, ok);
-    if (!ok) {
-        return false;
-    }
-    value2 = getMatchValue(str2, ok);
-    if (!ok) {
-        return false;
-    }
-    return value1 < value2;
+    return FloorStringCompare(str1, str2) <= 0;
+//    if (isZero(str1))
+//    {
+//        return true;
+//    } else if (isZero(str2)) {
+//        return false;
+//    }
+//    qint64 value1, value2;
+//    bool ok;
+//    value1 = getMatchValue(str1, ok);
+//    if (!ok) {
+//        return false;
+//    }
+//    value2 = getMatchValue(str2, ok);
+//    if (!ok) {
+//        return false;
+//    }
+//    return value1 < value2;
 }
